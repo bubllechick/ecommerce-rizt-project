@@ -1,15 +1,19 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
 import { sliderItems } from "../data";
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 40vh;
     display: flex;
-    // background-color: coral;
+    margin-top: 20px;
     position: relative;
     overflow: hidden;
+`;
+
+const WrapperSlider = styled.div`
+    padding: 5px;
 `;
 
 const Arrow = styled.div`
@@ -40,32 +44,33 @@ const Wrapper = styled.div`
 
 const Slide = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 50vh;
     display: flex;
     align-items: center;
     background-color: #${props => props.bg};
 `;
 
 const ImgContiner = styled.div`
-    height: 100%;
+    height: 70%;
+    padding: 0px;
     flex: 1;
 `;
 
 const Image = styled.img`
-    height: 80%;
+    height: 100%;
 `;
 
 const InfoContainer = styled.div`
     flex: 1;
-    padding: 50px;
+    padding: 5px;
 `;
 
 const Title = styled.h1`
-    font-size: 70px;
+    font-size: 50px;
 `;
 
 const Desc = styled.p`
-    margin: 50px 0px;
+    margin: 20px 0px;
     font-size: 20px;
     font-weight: 20px;
     letter-spacing: 3px;
@@ -83,29 +88,41 @@ const Button = styled.button`
 const Slider = () => {
 
     const [slideIndex, setSlideIndex] = useState(0);
+    const [slideProduct, setSlideProduct] = useState(0);
+
     const handleClick = (direction) => {
         if (direction === "left") {
-            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 5)
+            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
         } else {
-            setSlideIndex(slideIndex < 5 ? slideIndex + 1 : 0)
+            setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
         }
     };
+    const fetchData = () => {
+        return fetch("http://localhost:3001/product")
+            .then((response) => response.json())
+            .then((data) => setSlideProduct(data));
+    }
 
+    useEffect(() => {
+        fetchData();
+    }, [])
+    // console.log(slideProduct)
     return (
         <Container>
+            <WrapperSlider >
             <Arrow direction="left" onClick={() => handleClick("left")}>
                 <ArrowLeftOutlined />
             </Arrow>
 
             <Wrapper slideIndex={slideIndex}>
                 {sliderItems.map((item) => (
-                    <Slide bg={item.bg} key={item.id}>
+                    <Slide key={item.id}>
                         <ImgContiner>
-                            <Image src={item.img} />
+                            <Image src={item.foto1} />
                         </ImgContiner>
                         <InfoContainer>
-                            <Title>{item.title}</Title>
-                            <Desc>{item.desc}</Desc>
+                            <Title>{item.nama_product}</Title>
+                            <Desc>{item.deskripsi}</Desc>
                             <Button>SHOW NOW</Button>
                         </InfoContainer>
                     </Slide>
@@ -115,6 +132,7 @@ const Slider = () => {
             <Arrow direction="right" onClick={() => handleClick("right")}>
                 <ArrowRightOutlined />
             </Arrow>
+            </WrapperSlider>
         </Container>
     )
 }

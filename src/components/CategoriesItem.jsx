@@ -19,6 +19,7 @@ const Info = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    color: black;
     // background-color: yellow;
     display: flex;
     flex-direction: column;
@@ -40,12 +41,12 @@ const Button = styled.button`
     font-weight: 600;
 `;
 
-const CategoriesItem = ({item}) => {
+const CategoriesItem = ({ item }) => {
     return (
         <Container>
-            <Image src={item.img} />
+            <Image src={item.foto1} />
             <Info>
-                <Title>{item.title}</Title>
+                <Title>{item.nama_product}</Title>
                 <Button>SHOP NOW</Button>
             </Info>
         </Container>

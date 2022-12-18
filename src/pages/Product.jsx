@@ -75,13 +75,41 @@ const FilterSizeOption = styled.option`
   padding: 5px;
 `;
 
-const AddContainer = styled.div``;
+const AddContainer = styled.div`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-const AmountContainer = styled.div``;
+const AmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+`;
 
-const Amount = styled.div``;
+const Amount = styled.span`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+`;
 
-const Button = styled.button``;
+const Button = styled.button`
+  padding: 15px;
+  border: 2px solid teal;
+  cursor: pointer;
+  background-color: white;
+  font-weight: 500;
+
+  &:hover {
+    background-color: teal;
+  }
+`;
 
 const Product = () => {
   return (

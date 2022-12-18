@@ -24,7 +24,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5fbfd;
+    background-color: white;
     position: relative;
     &:hover ${Info} {
         opacity: 1;
@@ -66,7 +66,7 @@ const Product = ({ item }) => {
     return (
         <Container>
             <Circle />
-            <Image src={item.img} />
+            <Image src={item.foto1} />
             <Info>
                 <Icon>
                     <ShoppingCartOutlined />

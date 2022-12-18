@@ -3,16 +3,32 @@ import styled from 'styled-components'
 
 const Container = styled.div`
     display:flex;
+    background: rgb(21,125,138);
+    background: linear-gradient(
+        -180deg, 
+        rgba(21,125,138, 12) 0%,
+        rgba(18,82,82, 0.8) 100%);  
+    // background-size: cover;
 `;
 const Left = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
     padding: 20px;
+    color: white;
 `;
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    color: white;
+`;
+
+const Right = styled.div`
+    flex: 1;
+    align-items: center;
+    justify-content: end; 
+    padding: 20px;
+    color: white;
 `;
 
 const Title = styled.h3`
@@ -30,12 +46,6 @@ const List = styled.ul`
 const ListItem = styled.li`
     width: 50%;
     margin-bottom: 5px;
-`;
-
-const Right = styled.div`
-    flex: 1;
-    align-items: center;
-    justify-content: end; 
 `;
 
 const SosialContainer = styled.div`
@@ -65,7 +75,8 @@ const Desc = styled.div`
 const ContactItem = styled.div`
     margin-bottom: 20px;
     display: flex;
-    align-items: center;
+    align-items: left;
+    justify-content: left;
 `;
 
 const Payment = styled.img`

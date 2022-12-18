@@ -1,8 +1,11 @@
+import { Email, Map, Phone } from "@material-ui/icons"
 import styled from "styled-components"
 
 const Container = styled.div`
-    height: 30px;
-    background-color: teal;
+    height: 50px;
+    width: min(100% -1em, 69em);
+    margin-inline: auto;
+    background: rgb(21,125,138);
     color: white;
     display: flex;
     align-items: center;
@@ -14,7 +17,9 @@ const Container = styled.div`
 const Announcement = () => {
   return (
     <Container>
-        super deal 2 miliyar !!
+      <Phone style={{marginRight: 15}} />+62 878-1243-2900  
+      <Email style={{marginRight: 15, marginLeft: 50}}/> ritz@gmail.com
+      <Map style={{marginRight: 15, marginLeft: 50}}/> Tangerang 
     </Container>
   )
 }
