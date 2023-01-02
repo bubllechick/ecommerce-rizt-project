@@ -1,6 +1,16 @@
+
+import { NavigateBeforeOutlined, NavigateNextOutlined, SkipNext } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Slider from 'react-slick';
+import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import CoffeeIcon from '@mui/icons-material/Coffee';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import KitchenIcon from '@mui/icons-material/Kitchen';
+import CountertopsIcon from '@mui/icons-material/Countertops';
+// import '../style/style.css';
 
 
 const CardCategories = () => {
@@ -22,41 +32,78 @@ const CardCategories = () => {
         // eslint-disable-next-line
     }, [])
 
-    const handleClick = (e ,param) => {
+    const handleClick = (e, param) => {
         e.preventDefault();
         navigate(`/kategori/${param}`)
         window.location.reload();
     };
 
+
+    const SampleNextArrow = (props) => {
+        const { className, style, onClick } = props;
+        return (
+            <NavigateNextOutlined className={className} onClick={onClick} style={{ ...style, color: 'gray' }} />
+        );
+    }
+
+    const SamplePrevArrow = (props) => {
+        const { className, style, onClick } = props;
+        return (
+            <NavigateBeforeOutlined className={className} onClick={onClick} style={{ ...style, color: 'gray', paddingLeft: '2px' }} />
+        );
+    }
+
+    const kategoriForCard = [
+        {
+            key: 'Kebutuhan dapur',
+            icon: <KitchenIcon />
+        },
+        {
+            key: 'Kebutuhan rumah',
+            icon: <CountertopsIcon />
+        },
+        {
+            key: 'Kebutuhan Ibu, Bayi dan Anak',
+            icon: <BabyChangingStationIcon />
+        },
+        {
+            key: 'Makanan',
+            icon: <FastfoodIcon />
+        },
+        {
+            key: 'Minuman',
+            icon: <CoffeeIcon />
+        }, {
+            key: 'Kebutuhan Kesehatan',
+            icon: <HealthAndSafetyIcon />
+        }
+    ]
+
+    var settings = {
+        className: "slider variable-width",
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        variableWidth: true,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+    };
+
     return (
-        <div className='p-4'>
-            <Row xs={1} md={6}>
-                {kategori?.map && kategori.map(item => (
-                    <Col>
-                        <Card style={{ height: "100%", padding: 0, borderRadius: 10 }}>
-                            <Card.Body style={
-                                {
-                                    background: '#1e81b0',
-                                    borderColor: '',
-                                    border: 5,
-                                    borderRadius: 10,
-                                    textAlign: 'center',
-                                    fontSize: 13,
-                                    fontWeight: 700,
-                                    cursor: 'pointer'
-                                }
-                            }>
-                                <Card.Text style={
-                                    {
-                                        color: 'white',
-                                        cursor: 'pointer'
-                                    }
-                                } onClick={(event => handleClick(event ,`${item.kategori}`))}  >{item.kategori}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+        <div className='p-2'>
+
+            <Slider {...settings}>
+
+                {kategoriForCard?.map && kategoriForCard.map(item => (
+
+                    <div className="d-inline-flex p-2 bd-highlight align-items-center">
+                        <Button variant="white" style={{ textAlign: 'center', background: 'white', color: 'gray', borderRadius: '25px', border: '2px solid whitesmoke', boxShadow: '1px 2px 1px #9E9E9E' }}>
+                            {item.icon} {item.key}
+                        </Button>
+                    </div>
                 ))}
-            </Row>
+            </Slider>
         </div>
     )
 }

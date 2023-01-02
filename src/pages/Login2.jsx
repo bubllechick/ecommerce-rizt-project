@@ -46,8 +46,8 @@ const Login2 = (props) => {
                             <p className="has-text-centered" style={{ color: "red" }}>{msg}</p>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="text" placeholder="Enter email" value={no_hp} onChange={(e) => setNo_hp(e.target.value)} required />
+                                <Form.Label>No Handphone</Form.Label>
+                                <Form.Control type="number" placeholder="Enter No Handphone" value={no_hp} onChange={(e) => setNo_hp(e.target.value)} required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -64,8 +64,6 @@ const Login2 = (props) => {
                 </Row>
 
             </Container>
-            <hr />
-            <div className='p-4' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div>
             <hr />
             <CardCategories />
             <hr />

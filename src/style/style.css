@@ -1,0 +1,23 @@
+
+  .slick-dots.slick-thumb {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: left;
+  }
+  
+  .slick-dots.slick-thumb li {
+    width: 6px;
+    height: 6px;
+    margin: 0 3px;
+    border-radius: 999px;
+    transition: all 0.5s ease-in-out;
+    will-change: width;
+    background-color: black;
+  }
+  
+  .slick-dots.slick-thumb li.slick-active {
+    background-color: red;
+    width: 24px;
+  }
+  

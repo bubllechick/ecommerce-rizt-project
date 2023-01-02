@@ -7,8 +7,8 @@ const Cards = () => {
     const [product, setProduct] = useState([]);
     var token = localStorage.getItem("tokens");
 
-    const fetchDataCard = () => {
-        return fetch("http://localhost:3001/product")
+    const fetchDataCard = async () => {
+        return await fetch("http://localhost:3001/product")
             .then((response) => response.json())
             .then((data) => setProduct(data));
     }
@@ -31,21 +31,33 @@ const Cards = () => {
     };
 
     return (
-        <Row xs={1} md={6} className="g-4 m-4">
-            {product?.map && product.map(item => (
-                <Col>
-                    <Card style={{ height: "100%", padding: 7, border: "none" }}>
-                        <Card.Img variant="top" style={{ height: "100%", padding: 7 }} src={item.foto} />
-                        <Card.Body>
-                            <Card.Text className='m-0' style={{ padding: 2 }}>{item.nama}</Card.Text>
-                            <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}>Rp {item.harga}</Card.Text>
-                            <Card.Text style={{ padding: 0, fontSize: 12 }}>Stock {item.stock}</Card.Text>
-                        </Card.Body>
-                        <Button onClick={event => handleClick(event, `${item.id}`)} >Beli</Button>
-                    </Card>
+        <>
+            <Row>
+                <Col md={4}>
+                    <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27, marginTop: "2%" }}>Produk terbaru</div>
                 </Col>
-            ))}
-        </Row>
+                <Col md={{ span: 4, offset: 4 }} style={{ border: '2px', justifyContent: 'end', alignItems: 'end', display: 'flex', cursor: 'pointer' }}>
+                    <Button variant="link">
+                        Selengkapnya
+                    </Button>
+                </Col>
+            </Row>
+            <Row xs={1} md={6} className="g-4 m-4">
+                {product?.map && product.map(item => (
+                    <Col>
+                        <Card style={{ height: "100%", padding: 7, border: "none" }}>
+                            <Card.Img variant="top" style={{ height: "100%", padding: 7 }} src={item.foto} />
+                            <Card.Body>
+                                <Card.Text className='m-0' style={{ padding: 2 }}>{item.nama}</Card.Text>
+                                <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}>Rp {item.harga}</Card.Text>
+                                <Card.Text style={{ padding: 0, fontSize: 12 }}>Stock {item.stock}</Card.Text>
+                            </Card.Body>
+                            <Button onClick={event => handleClick(event, `${item.id}`)} >Beli</Button>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </>
     )
 }
 

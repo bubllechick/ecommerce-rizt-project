@@ -11,6 +11,7 @@ import Troli from "./pages/Troli";
 import Search from "./pages/Search";
 import Kategori from "./pages/Kategori";
 import SettingUser from "./pages/SettingUser";
+import AddProduct from "./pages/AddProduct";
 
 const App = () => {
   
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/successRegister" element={<SuccessRegister title="Success Register" />} />
           <Route path="/register" element={<Register2 title="Register" />} />
           <Route path="/setting" element={<SettingUser title="Setting" />} />
+          <Route path="/addProduct" element={<AddProduct title="Tambah produk" />} />
           <Route path="/kategori/:param" element={<Kategori title="Kategori" />} />
         </Routes>
       </Router>

@@ -8,8 +8,8 @@ const NavTop = () => {
             <Container>
                 <Row>
                     <Col style={{ fontSize: 14, fontWeight: 700 }} align="start">
-                        <LocationOn style={{ fontSize: 19, color: "gray", paddingRight: 7 }} />
-                        Tanggerang
+                        {/* <LocationOn style={{ fontSize: 19, color: "gray", paddingRight: 7 }} />
+                        Tanggerang */}
                     </Col>
                     {/* <Col style={{ fontSize: 14, fontWeight: 700}} align="end">Banyak diskonannya Buruan langganan !!!</Col> */}
                 </Row>

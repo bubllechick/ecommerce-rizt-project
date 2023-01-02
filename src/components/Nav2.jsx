@@ -1,8 +1,11 @@
 import { Badge } from '@material-ui/core'
 import { AccountCircleOutlined, SearchOutlined, ShoppingBasketOutlined, CloseOutlined, StoreMallDirectoryOutlined } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Form, InputGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Button, Container, Form, Image, InputGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Nav2 = () => {
 
@@ -27,7 +30,11 @@ const Nav2 = () => {
     }
 
     useEffect(() => {
-        fetchDataNav();
+        const data = setInterval(() => {
+            fetchDataNav();
+        }, 3000);
+        return () => clearInterval(data) // eslint-disable-next-line
+        // eslint-disable-next-line
         // setTimeout(() => this.fetchDataNav(), 5000);
     }, [])
 
@@ -36,7 +43,7 @@ const Nav2 = () => {
         e.preventDefault();
         try {
             localStorage.clear();
-           
+
             navigate('/login')
             window.location.reload();
         } catch (error) {
@@ -46,7 +53,7 @@ const Nav2 = () => {
 
     const settingUser = async (e) => {
         e.preventDefault();
-            navigate('/setting')
+        navigate('/setting')
     }
     const handleClick = async (e, cari) => {
         e.preventDefault();
@@ -106,8 +113,15 @@ const Nav2 = () => {
                             <ShoppingBasketOutlined />
                         </Badge>
                     </Nav.Link>
+                    {Object.keys(token || 0).length > 0 ?
+                        <Nav.Link style={{ color: "gray", marginLeft: "12px", marginRight: "0px", fontWeight: 700 }} className='p-1' href="">
+                            <Image src={user.foto} roundedCircle style={{ alignSelf: 'center', height: '30px', width: '30px' }} />
+                        </Nav.Link> :
+                        <Nav.Link style={{ color: "gray", marginLeft: "0px", marginRight: "0px", fontWeight: 700 }} className='p-0' href="">
+                        </Nav.Link>}
 
-                    <NavDropdown style={{ fontWeight: 700, color: "gray", marginLeft: "10px", marginRight: "25px" }} className='p-1' title={<AccountCircleOutlined />} id="navbarScrollingDropdown">
+
+                    <NavDropdown style={{ fontWeight: 700, color: "gray", marginLeft: "10px", marginRight: "25px" }} className='p-1' id="navbarScrollingDropdown">
                         <NavDropdown.Item hidden={
                             Object.keys(token || 0).length > 0 ? true : false
                         } href="/login" to="/login">
@@ -116,7 +130,12 @@ const Nav2 = () => {
                         <NavDropdown.Item hidden={
                             Object.keys(token || 0).length > 0 ? false : true
                         } onClick={event => settingUser(event)} href="/register" to="/register">
-                            Pengaturan
+                            <SettingsIcon /> Pengaturan
+                        </NavDropdown.Item>
+                        <NavDropdown.Item hidden={
+                            Object.keys(token || 0).length > 0 ? false : true
+                        } href="/addProduct" to="/addProduct">
+                            <PostAddIcon /> Tambah product
                         </NavDropdown.Item>
                         <NavDropdown.Divider hidden={
                             Object.keys(token || 0).length > 0 ? false : true
@@ -127,14 +146,14 @@ const Nav2 = () => {
                         <NavDropdown.Item hidden={
                             Object.keys(token || 0).length > 0 ? false : true
                         } onClick={event => logOut(event)} href="/login" to="/login">
-                            <CloseOutlined /> logout
+                            <LogoutIcon /> logout
                         </NavDropdown.Item>
                     </NavDropdown>
 
                 </Navbar.Collapse>
 
             </Container>
-        </Navbar>
+        </Navbar >
     )
 }
 

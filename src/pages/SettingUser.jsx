@@ -14,17 +14,24 @@ const SettingUser = (props) => {
     const [no_telp, setNo_telp] = useState('');
     const [foto, setfoto] = useState('');
     const [preview, setPreview] = useState('');
+    const [tgl_lahir, settgl_lahir] = useState('');
+
     const [msg, setMsg] = useState('');
 
     const [user, setUser] = useState([]);
 
     const navigate = useNavigate();
 
+    var token = localStorage.getItem("tokens");
+    var j = JSON.parse(token);
+    var x = j["token"]
+    var bearer = 'Bearer ' + x;
+
     const fetchDataUser = async () => {
-        let token = localStorage.getItem("tokens");
-        const j = JSON.parse(token);
-        const x = j["token"]
-        var bearer = 'Bearer ' + x;
+        // let token = localStorage.getItem("tokens");
+        // const j = JSON.parse(token);
+        // const x = j["token"]
+        // var bearer = 'Bearer ' + x;
         return await fetch("http://localhost:3001/auth/for-user-info", {
             method: 'GET',
             headers: {
@@ -40,7 +47,7 @@ const SettingUser = (props) => {
         fetchDataUser();
         document.title = props.title
         // eslint-disable-next-line
-        setNama,setNo_telp,setPassword
+        setNama, setNo_telp, setPassword
     }, [nama, no_telp, password])
 
     const convertToBase64 = (e) => {
@@ -60,10 +67,10 @@ const SettingUser = (props) => {
         e.preventDefault();
         console.log(userId)
         console.log(userId, nama, password, no_telp)
-        let token = localStorage.getItem("tokens");
-        const j = JSON.parse(token);
-        const x = j["token"];
-        var bearer = 'Bearer ' + x;
+        // let token = localStorage.getItem("tokens");
+        // const j = JSON.parse(token);
+        // const x = j["token"];
+        // var bearer = 'Bearer ' + x;
         if (nama.length === 0) {
             setNama(user.nama)
         }
@@ -84,7 +91,8 @@ const SettingUser = (props) => {
                 id: userId,
                 nama: nama,
                 no_telp: no_telp,
-                password: password
+                password: password,
+                tgl_lahir: tgl_lahir
             }
         }).then((res) => {
             console.log(res.data);
@@ -95,10 +103,10 @@ const SettingUser = (props) => {
 
     const saveImage = async (e, userId) => {
         console.log(userId)
-        let token = localStorage.getItem("tokens");
-        const j = JSON.parse(token);
-        const x = j["token"];
-        var bearer = 'Bearer ' + x;
+        // let token = localStorage.getItem("tokens");
+        // const j = JSON.parse(token);
+        // const x = j["token"];
+        // var bearer = 'Bearer ' + x;
         await axios({
             method: 'PATCH',
             url: `http://localhost:3001/user/image/${userId}`,
@@ -137,9 +145,15 @@ const SettingUser = (props) => {
                         <p className="has-text-centered" style={{ color: "gray", fontWeight: 700, fontSize: "17px" }}>Ubah data user</p>
                         <Form className="box">
                             <p className="has-text-centered" style={{ color: "red" }}>{msg}</p>
+
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Fullname</Form.Label>
-                                <Form.Control type="text" placeholder="Fullname" value={nama ? (nama) : user.nama} onChange={(e) => setNama(e.target.value)} required />
+                                <Form.Label>Nama lengkap</Form.Label>
+                                <Form.Control type="text" placeholder="Nama lengkap" value={nama ? (nama) : user.nama} onChange={(e) => setNama(e.target.value)} required />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Tanggal lahir</Form.Label>
+                                <Form.Control type="date" placeholder="Tanggal lahir" value={tgl_lahir ? (tgl_lahir) : user.tgl_lahir} onChange={(e) => settgl_lahir(e.target.value)} required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">

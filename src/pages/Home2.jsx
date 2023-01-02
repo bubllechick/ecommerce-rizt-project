@@ -5,20 +5,24 @@ import Cards2 from '../components/Cards2';
 import Footer1 from '../components/Footer1';
 import Nav2 from '../components/Nav2';
 import NavTop from '../components/NavTop';
+import Slider1 from '../components/Slider1';
 
 const Home2 = () => {
     return (
         <>
             <NavTop />
             <Nav2 />
-            <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27,marginTop: "2%"}}>Produk terbaru</div>
+            {/* <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div> */}
+            <Slider1 />
+            <CardCategories />
+            {/* <hr /> */}
             <Cards />
             <hr />
-            <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk rekomendasi</div>
+            {/* <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk rekomendasi</div> */}
            <Cards2 />
-            <hr />
+            {/* <hr />
             <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div>
-            <CardCategories />
+            <CardCategories /> */}
             <Footer1 />
         </>
     )

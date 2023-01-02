@@ -75,10 +75,13 @@ const Troli = (props) => {
         const dataTroli = setInterval(() => {
             getDataTroli()
         }, 3000);
-
-        document.title = props.title // eslint-disable-next-line
-        return () => clearInterval(dataTroli) // eslint-disable-next-line
-        // eslint-disable-next-line
+        if (!dataTroli) {
+            alert('data not load')
+        } else {
+            document.title = props.title // eslint-disable-next-line
+            return () => clearInterval(dataTroli) // eslint-disable-next-line
+            // eslint-disable-next-line
+        }
     }, [])
 
     const bucket = troli.cart;
@@ -192,7 +195,7 @@ const Troli = (props) => {
                                             <Col sm={3}>
                                                 <Card.Img className='pb-3 pt-3' rounded style={{ width: '10rem', background: 'cover', paddingRight: 7 }} src={item.product.foto} />
                                             </Col>
-                                            <Col sm={5}>
+                                            <Col sm={9}>
                                                 <Card.Title style={{ fontWeight: 700, fontSize: "16px", paddingBottom: "0px" }}>{item.product.nama}</Card.Title>
                                                 <Card.Text style={{ fontWeight: 700, fontSize: "16px", paddingBottom: "0px", }}>
                                                     Rp {item.product.harga}
@@ -201,14 +204,14 @@ const Troli = (props) => {
                                                     Stok {item.product.stock}
                                                 </Card.Text>
 
-                                                <Row xs={6} md={4} lg={6} className='pb-2'>
-                                                    <Col className='m-1 p-1' onClick={() => incrementCounter(item.id)}><Add style={{ cursor: 'pointer' }} /></Col>
+                                                <Row xs={2} md={2} lg={3} className='pb-2'>
+                                                    {/* <Col className='m-1 p-1' onClick={() => incrementCounter(item.id)}><Add style={{ cursor: 'pointer' }} /></Col> */}
                                                     <Col className='m-1 p-1'>
                                                         <Card.Text style={{ fontWeight: 700, fontSize: "17px" }}>
-                                                            {item.jumlah}
+                                                            <Form.Control type="number"  placeholder={item.jumlah}/>
                                                         </Card.Text>
                                                     </Col>
-                                                    <Col className='m-1 p-1' onClick={() => decrementCounter(item.id)}><Remove style={{ cursor: 'pointer' }} /></Col>
+                                                    {/* <Col className='m-1 p-1' onClick={() => decrementCounter(item.id)}><Remove style={{ cursor: 'pointer' }} /></Col> */}
                                                     <Col className='m-1 p-1' >
                                                         <Button className='m-1 p-1' onClick={handleShow} style={{ color: "white", background: 'red', border: "none" }}>
                                                             <Delete />
@@ -288,14 +291,14 @@ const Troli = (props) => {
             </Container>
 
             <hr />
-            <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk terbaru</div>
+            {/* <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk terbaru</div> */}
             <Cards />
             <hr />
-            <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk rekomendasi</div>
+            {/* <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk rekomendasi</div> */}
 
             <Cards2 />
             <hr />
-            <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div>
+            {/* <div className='p-2' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div> */}
             <CardCategories />
             <Footer1 />
 

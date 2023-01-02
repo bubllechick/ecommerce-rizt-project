@@ -13,7 +13,7 @@ import NavTop from '../components/NavTop';
 const Kategori = (props) => {
     const { param } = useParams();
     const [kategori, setKategori] = useState([]);
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
     const navigate = useNavigate();
 
 
@@ -30,7 +30,7 @@ const Kategori = (props) => {
     useEffect(() => {
         // const data = setInterval(() => {
             getKategori()
-        //     document.title = props.title // eslint-disable-next-line
+            document.title = props.title // eslint-disable-next-line
         // }, 3000);
         // return () => clearInterval(data) // eslint-disable-next-line
         // // eslint-disable-next-line

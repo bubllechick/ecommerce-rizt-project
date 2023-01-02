@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import CardCategories from '../components/CardCategories'
-import { Button, Card, Col, Container, Form, Image, Row } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import Footer1 from '../components/Footer1'
 import Nav2 from '../components/Nav2'
-import NavTop from '../components/NavTop'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Register2 = (props) => {
+const AddProduct = (props) => {
+
     const [nama, setNama] = useState('');
-    const [password, setPassword] = useState('');
-    const [no_hp, setNo_hp] = useState('');
+    const [kategori, setKategori] = useState('');
+    const [harga, setHarga] = useState('');
+    const [stock, setStock] = useState('');
     const [foto, setfoto] = useState('');
-    const [tgl_lahir, settgl_lahir] = useState('');
+    
     const [preview, setPreview] = useState('');
+
     const [msg, setMsg] = useState('');
 
     const [user, setUser] = useState([]);
@@ -54,22 +55,23 @@ const Register2 = (props) => {
         document.title = props.title // eslint-disable-next-line
     }, [])
 
-    const Register = async (e) => {
+    const AddProduct = async (e) => {
         e.preventDefault();
-        console.log(nama, password, no_hp, foto);
+        // console.log(nama, password, no_hp, foto);
         try {
-            const data = await axios.post('http://localhost:3001/user', {
+            const data = await axios.post('http://localhost:3001/product', {
                 nama: nama,
-                password: password,
-                no_telp: no_hp,
+                kategori: kategori,
+                harga: harga,
+                stock: stock,
                 foto: foto
             });
             if (data) {
-                setNama('')
-                setPassword('')
-                setNo_hp('')
-                setfoto('')
-                navigate("/successRegister");
+                // setNama('')
+                // setPassword('')
+                // setNo_hp('')
+                // setfoto('')
+                // navigate("/successRegister");
             }
         } catch (error) {
             if (error.response) {
@@ -78,35 +80,35 @@ const Register2 = (props) => {
         }
     }
 
-
     return (
-        <div>
-            <NavTop />
+        <>
             <Nav2 />
+
             <Container className='g-1 m-5'>
+            
                 <Row>
                     <Col md={{ span: 4, offset: 4 }}>
-
-                        <Form onSubmit={Register} className="box">
+                    <p className="has-text-centered" style={{ color: "Black", fontSize: 20, fontWeight: 700 }}>Tambah Produk</p>
+                        <Form className="box">
                             <p className="has-text-centered" style={{ color: "red" }}>{msg}</p>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Nama lengkap</Form.Label>
-                                <Form.Control type="text" placeholder="Fullname" value={nama} onChange={(e) => setNama(e.target.value)} required />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Tanggal lahir</Form.Label>
-                                <Form.Control type="date" placeholder="Tanggal lahir" value={nama} onChange={(e) => setNama(e.target.value)} required />
+                                <Form.Label>Nama Produk</Form.Label>
+                                <Form.Control type="text" placeholder="Nama Produk" value={nama} onChange={(e) => setNama(e.target.value)} required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                                <Form.Label>Kategori</Form.Label>
+                                <Form.Control type="text" placeholder="Kategori" value={kategori} onChange={(e) => setKategori(e.target.value)} required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>NO. Hp</Form.Label>
-                                <Form.Control type="number" placeholder="No Handphone" value={no_hp} onChange={(e) => setNo_hp(e.target.value)} required />
+                                <Form.Label>Harga</Form.Label>
+                                <Form.Control type="number" placeholder="Harga" value={harga} onChange={(e) => setHarga(e.target.value)} required />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Stok</Form.Label>
+                                <Form.Control type="number" placeholder="Stok" value={stock} onChange={(e) => setStock(e.target.value)} required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -118,11 +120,6 @@ const Register2 = (props) => {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                {/* <Form.Label>Foto</Form.Label> */}
-                                {/* <Col> */}
-                                {/* <Image roundedCircle src={preview ? (preview) : ("")} style={{ border: '1px solid gray' }} className="justify-content-center g-1 mt-0" /> */}
-                                {/* </Col> */}
-                                {/* <Form.Control type="file" placeholder="Foto" onChange={convertToBase64} required /> */}
                             </Form.Group>
 
                             <Button variant="info" style={{ color: 'white', fontWeight: 700 }} type='submit'>
@@ -131,16 +128,11 @@ const Register2 = (props) => {
                         </Form>
                     </Col>
                 </Row>
-
             </Container>
-            <hr />
-            <div className='p-4' style={{ color: "black", fontWeight: 700, fontSize: 27 }}>Produk kategori</div>
-            <hr />
-            <CardCategories />
-            <hr />
+
             <Footer1 />
-        </div>
+        </>
     )
 }
 
-export default Register2
+export default AddProduct
