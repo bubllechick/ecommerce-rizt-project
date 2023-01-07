@@ -236,20 +236,14 @@ const Troli = (props) => {
         for (var i = 0; i < bucket.length; i++) {
             var toko = bucket[i].product.toko.id
             var object = {
-                // nama: JSON.stringify(bucket[i].product.nama),
-                // harga: bucket[i].product.harga,
-                // jumlah: bucket[i].jumlah,
-                // totalHargaBarang: bucket[i].jumlah * bucket[i].product.harga
-
                 product_id: bucket[i].product.id,
                 quantity: parseInt(bucket[i].jumlah)
             };
             DataObj.push(object)
         }
-        // url: `http://localhost:3001/order`,
-
+        
         const bodyParameters = {
-            seller_id: JSON.stringify(toko),
+            seller_id: toko,
             product_item: DataObj
         }
         const config = {
@@ -257,10 +251,10 @@ const Troli = (props) => {
         }
 
         await axios.post(
-            'http://localhost:3001/order', {
+            'http://localhost:3001/order',
             bodyParameters,
             config
-        }).then((res) => {
+        ).then((res) => {
             console.log(res.data);
         }).catch((err) => {
             console.log(err);
