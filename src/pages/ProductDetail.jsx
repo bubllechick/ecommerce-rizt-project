@@ -53,27 +53,41 @@ const ProductDetail = (props) => {
 
     return (
         <>
-            <NavTop />
-            <Nav2 />
-            <Container fluid className="p-5" style={{ display: 'flex', justifyContent: 'center' }}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Header>{productId.kategori}</Card.Header>
-                    <Image rounded variant="top" style={{ background: 'cover', padding: 7 }} src={productId.foto} />
-                    <Card.Body>
-                        <Card.Title>{productId.nama}</Card.Title>
-                        <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}>
-                            Rp {productId.harga}
-                        </Card.Text>
-                        <Card.Text style={{ padding: 0, color: "red", fontWeight: 700 }}>
-                            Stok {productId.stock}
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="text-muted" style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button style={{ color: 'white', fontWeight: 700 }} variant="primary" onClick={(event => addCart(event, `${productId.id}`))}>Tambah ke troli</Button>
-                    </Card.Footer>
-                </Card>
+            <Container className='md justify-content-center'>
+                <NavTop />
+                <Nav2 />
+                <Container fluid className="p-5" style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Header>{productId.kategori}</Card.Header>
+                        <Image rounded variant="top" style={{ background: 'cover', padding: 7 }} src={productId.foto} />
+                        <Card.Body>
+                            <Card.Title>{productId.nama}</Card.Title>
+
+                            {
+
+                                productId.diskon !== '' ?
+                                    <>
+                                        <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700, textDecoration: 'line-through' }}>Rp {productId.harga}</Card.Text>
+                                        <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}>Rp {productId.harga - productId.diskon}</Card.Text>
+                                    </>
+                                    :
+                                    <>
+                                        <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}>Rp {productId.harga}</Card.Text>
+                                        <Card.Text style={{ padding: 0, color: "blue", fontWeight: 700 }}></Card.Text>
+                                    </>
+                            }
+
+                            <Card.Text style={{ padding: 0, color: "red", fontWeight: 700 }}>
+                                Stok {productId.stock}
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="text-muted" style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Button variant="outline-success" style={{ fontWeight: 700 }} onClick={(event => addCart(event, `${productId.id}`))}>Tambah ke troli</Button>
+                        </Card.Footer>
+                    </Card>
+                </Container>
+                <Footer1 />
             </Container>
-            <Footer1 />
         </>
     )
 }

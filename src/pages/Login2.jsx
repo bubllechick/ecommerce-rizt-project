@@ -8,7 +8,6 @@ import NavTop from '../components/NavTop'
 import axios from 'axios';
 
 const Login2 = (props) => {
-
     const [no_hp, setNo_hp] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
@@ -22,7 +21,31 @@ const Login2 = (props) => {
                 password: password
             });
             localStorage.setItem("tokens", JSON.stringify(data.data));
-            navigate("/");
+            if (data) {
+                var token = localStorage.getItem("tokens");
+                var j = JSON.parse(token);
+                var x = j["token"];
+                var bearer = 'Bearer ' + x;
+                const instance = axios.create({
+                    baseURL: 'http://localhost:3001/auth/',
+                    timeout: 1000,
+                    headers: { 'Authorization': `${bearer}` }
+                });
+                const getdata = await instance.get('/for-user-info')
+                    .then(response => {
+                        console.log(response.data.role)
+                        localStorage.setItem("role", JSON.stringify(response.data.role));
+                        return response.data.role;
+                    })
+                if (getdata === 'user') {
+                    navigate("/");
+                    document.location.replace();
+                } else {
+                    navigate("/adminDashboard")
+                }
+            } else {
+                console.log('gagal')
+            }
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.message);
@@ -31,11 +54,17 @@ const Login2 = (props) => {
     }
 
     useEffect(() => {
+        var token = localStorage.getItem("tokens");
+        if (token) {
+            navigate("/")
+            window.location.reload();
+            document.location.replace();
+        }
         document.title = props.title // eslint-disable-next-line
     }, [])
 
     return (
-        <div>
+        <Container className='md justify-content-center'>
             <NavTop />
             <Nav2 />
             <Container className='g-1 m-5'>
@@ -55,7 +84,7 @@ const Login2 = (props) => {
                                 <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             </Form.Group>
 
-                            <Button variant="info" style={{color: 'white', fontWeight:700}} type='submit'>
+                            <Button variant="outline-success" style={{ fontWeight: 700 }} type='submit'>
                                 Login
                             </Button>
                         </Form>
@@ -70,7 +99,7 @@ const Login2 = (props) => {
             <Footer1 />
 
 
-        </div>
+        </Container>
     )
 }
 

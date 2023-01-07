@@ -5,7 +5,7 @@ const Footer1 = () => {
     return (
         <div>
             <Container>
-                <Row style={{ background: '#1e81b0' }}>
+                <Row style={{ background: 'green' }}>
                     <Col style={
                         {
                             color: 'white', textAlign: 'center'

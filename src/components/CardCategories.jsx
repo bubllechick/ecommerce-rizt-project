@@ -18,17 +18,17 @@ const CardCategories = () => {
     const [kategori, setKategori] = useState([]);
     const navigate = useNavigate();
 
-    const fetchData = async () => {
-        return await fetch("http://localhost:3001/product/categories")
-            .then((response) => response.json())
-            .then((data) => setKategori(data));
-    }
+    // const fetchData = async () => {
+    //     return await fetch("http://localhost:3001/product/categories")
+    //         .then((response) => response.json())
+    //         .then((data) => setKategori(data));
+    // }
 
     useEffect(() => {
-        const data = setInterval(() => {
-            fetchData()
-        }, 3000);
-        return () => clearInterval(data) // eslint-disable-next-line
+        // const data = setInterval(() => {
+        //     fetchData()
+        // }, 3000);
+        // return () => clearInterval(data) // eslint-disable-next-line
         // eslint-disable-next-line
     }, [])
 
@@ -42,14 +42,20 @@ const CardCategories = () => {
     const SampleNextArrow = (props) => {
         const { className, style, onClick } = props;
         return (
-            <NavigateNextOutlined className={className} onClick={onClick} style={{ ...style, color: 'gray' }} />
+            <NavigateNextOutlined
+             className={className}
+              onClick={onClick} 
+              style={{ ...style, color: 'gray',marginLeft: '20px' }} />
         );
     }
 
     const SamplePrevArrow = (props) => {
         const { className, style, onClick } = props;
         return (
-            <NavigateBeforeOutlined className={className} onClick={onClick} style={{ ...style, color: 'gray', paddingLeft: '2px' }} />
+            <NavigateBeforeOutlined 
+            className={className} 
+            onClick={onClick} 
+            style={{ ...style, color: 'gray', marginRight: '20px' }} />
         );
     }
 
@@ -91,14 +97,25 @@ const CardCategories = () => {
     };
 
     return (
-        <div className='p-2'>
+        <div className='m-5'>
 
             <Slider {...settings}>
 
                 {kategoriForCard?.map && kategoriForCard.map(item => (
 
-                    <div className="d-inline-flex p-2 bd-highlight align-items-center">
-                        <Button variant="white" style={{ textAlign: 'center', background: 'white', color: 'gray', borderRadius: '25px', border: '2px solid whitesmoke', boxShadow: '1px 2px 1px #9E9E9E' }}>
+                    <div className="d-inline-flex p-1 bd-highlight align-items-center">
+                        <Button
+                            variant="white"
+                            style={
+                                {
+                                    textAlign: 'center',
+                                    background: 'white',
+                                    color: 'gray',
+                                    borderRadius: '25px',
+                                    border: '2px solid whitesmoke',
+                                    boxShadow: '1px 2px 1px #9E9E9E'
+                                }
+                            }>
                             {item.icon} {item.key}
                         </Button>
                     </div>
